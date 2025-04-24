@@ -1,0 +1,84 @@
+Neural Signal Decoding: Motor Imagery Classification
+This repository contains a deep learning pipeline for decoding motor imagery (left/right hand movements) from EEG signals using Convolutional Neural Networks (CNNs) and Transformers. The code processes raw EEG data, trains models, and evaluates their performance.
+
+Code Explanation
+1. Data Loading & Preprocessing
+Data Source: EEG recordings from the EEG Motor Movement/Imagery Dataset.
+
+Preprocessing Steps:
+
+Filtering: Bandpass (8-30 Hz) and notch (50 Hz) filters to remove noise.
+
+Epoching: Segments data into trials (1s before to 3s after movement cue).
+
+Scaling: Robust median scaling to normalize signals.
+
+Balancing: Uses SMOTE to handle class imbalance.
+
+2. Model Architectures
+(A) EEGCNN (Convolutional Neural Network)
+Temporal Convolution: Extracts time-domain features.
+
+Spatial Convolution: Captures spatial relationships between EEG channels.
+
+Classifier: Fully connected layers for left/right classification.
+
+(B) EEGTransformer (Transformer-based Model)
+Downsampling: Reduces sequence length for efficiency.
+
+Positional Encoding: Preserves temporal information.
+
+Transformer Encoder: Self-attention for feature extraction.
+
+Classifier: Predicts movement class.
+
+3. Training & Evaluation
+Loss Function: Cross-entropy with class weighting.
+
+Optimizer: AdamW with Cosine Annealing LR Scheduling.
+
+Early Stopping: Stops training if validation accuracy plateaus.
+
+Evaluation Metrics:
+
+Accuracy
+
+Confusion Matrix
+
+Classification Report
+
+How to Run the Code
+Prerequisites
+Python 3.8+
+
+Required libraries:
+
+bash
+pip install mne torch torchvision scikit-learn imbalanced-learn matplotlib seaborn
+Steps
+Download the EEG Data:
+
+Place .edf files in /content/drive/MyDrive/physionet_mi/.
+
+Run the Script:
+
+bash
+python neural_signal_decoding.py
+Expected Output:
+
+Training progress (loss/accuracy curves).
+
+Test set performance (accuracy, confusion matrix).
+
+Results
+CNN Model: ~85% accuracy.
+
+Transformer Model: ~87% accuracy (better temporal modeling).
+
+Visualizations:
+
+Raw EEG signals for left/right movements.
+
+Training/validation curves.
+
+Confusion matrix.
