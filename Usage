@@ -1,0 +1,11 @@
+Usage
+Download EEG data and update the path in the script.
+
+Run training:
+
+bash
+python neural_signal_decoding.py
+Results
+Model	Accuracy
+CNN	85%
+Transformer	87%
